@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QuietHour Preregister</title>
+<style>
+body{margin:0;background:#eef5eb;font-family:Segoe UI,sans-serif;color:#3b4838;display:flex;justify-content:center;padding:40px}
+.card{max-width:760px;background:#fbfdf8;border:1px solid #d2e0cc;border-radius:22px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.06)}
+.hero{height:170px;background:linear-gradient(#dcebd6,#eef5eb);display:flex;align-items:flex-end;justify-content:center}
+.hero svg{width:100%;height:170px}
+.content{padding:36px 42px}
+h1{font-weight:500;color:#6f9f73;margin-top:0}
+h2{font-weight:500;margin-top:28px}
+ul{padding-left:18px;line-height:2}
+.progress{height:14px;background:#dfead9;border-radius:999px;overflow:hidden}
+.fill{height:100%;width:42.7%;background:#8fbb84}
+input[type=email]{width:100%;padding:14px;border:1px solid #bfd2b7;border-radius:10px;font-size:16px}
+button{width:100%;margin-top:18px;padding:15px;border:none;border-radius:12px;background:#8fbb84;color:#fff;font-size:17px;cursor:pointer}
+.note{text-align:center;color:#738171;font-size:.9rem;margin-top:10px}
+#success{display:none;text-align:center}
+</style>
+</head>
+<body>
+<div class="card">
+<div class="hero">
+<svg viewBox="0 0 760 170" preserveAspectRatio="none">
+<rect width="760" height="170" fill="#e8f2e3"/>
+<path d="M0 150 L70 80 L120 150 Z" fill="#a9c4a1"/>
+<path d="M90 150 L170 55 L250 150 Z" fill="#8fb58a"/>
+<path d="M210 150 L290 70 L360 150 Z" fill="#7ea37a"/>
+<path d="M330 150 L430 45 L520 150 Z" fill="#93b88f"/>
+<path d="M470 150 L560 75 L640 150 Z" fill="#7ea37a"/>
+<path d="M610 150 L690 60 L760 150 Z" fill="#9abf95"/>
+<rect y="150" width="760" height="20" fill="#b8d0b0"/>
+</svg>
+</div>
+
+<div class="content" id="form">
+<h1>Become an Early Member</h1>
+<p>Help shape QuietHour before launch and receive permanent access to our exclusive preregistration sound collection.</p>
+
+<h2>Exclusive Sounds</h2>
+<ul>
+<li>Cozy Bookstore</li>
+<li>Thunderstorm Deluxe</li>
+<li>Night Train</li>
+<li>Vintage Library</li>
+</ul>
+
+<h2>Limited Availability</h2>
+<div class="progress"><div class="fill"></div></div>
+<p><strong>427 / 1000</strong> early member spots reserved</p>
+
+<h2>Email</h2>
+<input id="email" type="email" placeholder="you@example.com">
+<p><label><input type="checkbox" checked> Notify me when QuietHour launches.</label></p>
+<button onclick="register()">Reserve My Spot</button>
+<div class="note">No payment required. Demo page.</div>
+</div>
+
+<div class="content" id="success" style="display:none">
+<h1>You're on the list.</h1>
+<p>Thanks for preregistering. We'll email you when QuietHour launches so you can unlock your exclusive sound collection.</p>
+</div>
+
+</div>
+<script>
+function register(){
+const e=document.getElementById('email').value.trim();
+if(!e){alert('Please enter your email.');return;}
+localStorage.setItem('qh_email',e);
+localStorage.setItem('qh_email', e);
+localStorage.setItem('qh_early_access', 'true');
+document.getElementById('form').style.display='none';
+document.getElementById('success').style.display='block';
+}
+</script>
+</body></html>
