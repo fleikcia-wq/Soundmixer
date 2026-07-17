@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QuietHour Preregister</title>
+<style>
+body{margin:0;background:#eef5eb;font-family:Segoe UI,sans-serif;color:#3b4838;display:flex;justify-content:center;padding:40px 20px}
+.card{max-width:760px;width:100%;background:#fbfdf8;border:1px solid #d2e0cc;border-radius:22px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.06)}
+.hero{height:170px;background:linear-gradient(#dcebd6,#eef5eb);display:flex;align-items:flex-end;justify-content:center}
+.hero svg{width:100%;height:170px}
+.content{padding:36px 42px}
+h1{font-weight:500;color:#6f9f73;margin-top:0}
+h2{font-weight:500;margin-top:28px}
+ul{padding-left:18px;line-height:2}
+.progress{height:14px;background:#dfead9;border-radius:999px;overflow:hidden}
+.fill{height:100%;width:42.7%;background:#8fbb84}
+input[type=email]{width:100%;padding:14px;border:1px solid #bfd2b7;border-radius:10px;font-size:16px;box-sizing:border-box}
+button.primary{width:100%;margin-top:18px;padding:15px;border:none;border-radius:12px;background:#8fbb84;color:#fff;font-size:17px;cursor:pointer;transition:background .2s}
+button.primary:hover{background:#79a76d}
+.note{text-align:center;color:#738171;font-size:.9rem;margin-top:10px}
+
+/* success screen */
+#success{display:none;text-align:center}
+#success h1{color:#6f9f73}
+#success p{color:#5a7055;line-height:1.6}
+.badge{display:inline-block;background:#e8f5e4;border:1px solid #b8d9b0;border-radius:999px;padding:6px 16px;font-size:13px;color:#5a8c55;margin-bottom:18px}
+
+/* revoke button */
+.revoke-wrap{margin-top:28px;padding-top:22px;border-top:1px solid #e0ead9}
+.revoke-wrap p{font-size:13px;color:#8a9e85;margin:0 0 10px}
+button.revoke{
+  background:none;
+  border:1px solid #d4bfbf;
+  color:#b07070;
+  border-radius:10px;
+  padding:10px 20px;
+  font-size:13.5px;
+  cursor:pointer;
+  transition:all .2s;
+}
+button.revoke:hover{background:#fdf4f4;border-color:#c09090}
+button.revoke:disabled{opacity:.5;cursor:not-allowed}
+
+.revoked-note{
+  display:none;
+  background:#f9f3f3;
+  border:1px solid #e8d0d0;
+  border-radius:10px;
+  padding:14px 18px;
+  font-size:13px;
+  color:#9a7070;
+  margin-top:12px;
+  text-align:left;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="hero">
+    <svg viewBox="0 0 760 170" preserveAspectRatio="none">
+      <rect width="760" height="170" fill="#e8f2e3"/>
+      <path d="M0 150 L70 80 L120 150 Z" fill="#a9c4a1"/>
+      <path d="M90 150 L170 55 L250 150 Z" fill="#8fb58a"/>
+      <path d="M210 150 L290 70 L360 150 Z" fill="#7ea37a"/>
+      <path d="M330 150 L430 45 L520 150 Z" fill="#93b88f"/>
+      <path d="M470 150 L560 75 L640 150 Z" fill="#7ea37a"/>
+      <path d="M610 150 L690 60 L760 150 Z" fill="#9abf95"/>
+      <rect y="150" width="760" height="20" fill="#b8d0b0"/>
+    </svg>
+  </div>
+
+  <div class="content" id="formSection">
+    <h1>Become an Early Member</h1>
+    <p>Help shape QuietHour before launch and receive permanent access to our exclusive preregistration sound collection.</p>
+
+    <h2>Exclusive Sounds</h2>
+    <ul>
+      <li>Cozy Bookstore</li>
+      <li>Thunderstorm Deluxe</li>
+      <li>Night Train</li>
+      <li>Vintage Library</li>
+    </ul>
+
+    <h2>Limited Availability</h2>
+    <div class="progress"><div class="fill"></div></div>
+    <p><strong>427 / 1000</strong> early member spots reserved</p>
+
+    <h2>Email</h2>
+    <input id="email" type="email" placeholder="you@example.com">
+    <p><label><input type="checkbox" checked> Notify me when QuietHour launches.</label></p>
+    <button class="primary" onclick="register()">Reserve My Spot</button>
+    <div class="note">No payment required. Demo page.</div>
+  </div>
+
+  <div class="content" id="success">
+    <div class="badge">✓ Early member</div>
+    <h1>You're on the list.</h1>
+    <p>Thanks for preregistering. We'll email you when QuietHour launches so you can unlock your exclusive sound collection.</p>
+
+    <div class="revoke-wrap">
+      <p>Changed your mind, or testing the flow?</p>
+      <button class="revoke" id="revokeBtn" onclick="revokeAccess()">Remove my early access</button>
+      <div class="revoked-note" id="revokedNote">
+        Early access removed. The exclusive sounds will be locked again in the app the next time it loads.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function register(){
+    const e = document.getElementById('email').value.trim();
+    if(!e){ alert('Please enter your email.'); return; }
+    localStorage.setItem('qh_email', e);
+    localStorage.setItem('qh_early_access', 'true');
+    document.getElementById('formSection').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+  }
+
+  function revokeAccess(){
+    localStorage.removeItem('qh_early_access');
+    localStorage.removeItem('qh_email');
+    document.getElementById('revokeBtn').disabled = true;
+    document.getElementById('revokeBtn').textContent = 'Early access removed';
+    document.getElementById('revokedNote').style.display = 'block';
+  }
+</script>
+</body></html>
